@@ -32,10 +32,9 @@ impl Tree {
     ) + &self
       .edges()
       .iter()
-      .map(|i| format!("  {}:p{} -> {}_{} [headport=n]", path, i, path, i))
+      .map(|i| format!("  {}:p{} -> {}_{} [headport=n];\n", path, i, path, i))
       .collect::<Vec<_>>()
-      .join("\n")
-      + "\n"
+      .join("")
       + &children()
         .map(|(c, i)| c.dot_inner(format!("{}_{}", path, i)))
         .collect::<Vec<_>>()
