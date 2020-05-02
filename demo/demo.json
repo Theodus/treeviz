@@ -1,0 +1,18 @@
+{
+  "id": "Tree",
+  "children": [
+    {
+      "id": "b",
+      "children": [
+        {
+          "id": "c",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "d",
+      "children": []
+    }
+  ]
+}
