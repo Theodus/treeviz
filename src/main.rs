@@ -1,5 +1,5 @@
 use serde::Deserialize;
-use serde_json::Result;
+use std::io::Read;
 
 #[derive(Debug, Deserialize)]
 struct Tree {
@@ -53,10 +53,21 @@ impl Tree {
 }
 
 fn main() {
-  let bs = std::fs::read("demo/demo.json").unwrap();
-  let text = String::from_utf8(bs).unwrap();
-  let tree: Tree = serde_json::from_str(&text).unwrap();
-
-  // println!("{:#?}", tree);
-  println!("{}", tree.dot());
+  let text = match std::env::args().nth(1) {
+    Some(file_name) => String::from_utf8(std::fs::read(file_name).unwrap()).unwrap(),
+    None => {
+      let mut buf = String::new();
+      match std::io::stdin().read_to_string(&mut buf) {
+        Ok(_) => buf,
+        Err(_) => return,
+      }
+    }
+  };
+  match serde_json::from_str::<Tree>(&text) {
+    Ok(tree) => println!("{}", tree.dot()),
+    Err(err) => {
+      eprintln!("{}", err);
+      std::process::exit(1)
+    }
+  };
 }
