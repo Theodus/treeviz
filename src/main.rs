@@ -9,7 +9,7 @@ struct Tree {
 
 impl Tree {
   fn dot(&self) -> String {
-    format!("digraph {} {{\n", self.id)
+    format!("digraph \"{}\" {{\n", self.id)
       + "  rankdir=TD;\n"
       + "  node [shape=record,width=0.1,height=0.1];\n\n"
       + &self.dot_inner("n".to_string())
