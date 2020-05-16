@@ -1,5 +1,5 @@
 #!/bin/sh
 
-cargo run | tee demo.dot &&
+cargo run demo/demo.json | tee demo.dot &&
   dot -Tsvg demo.dot >demo.svg &&
   mv demo.dot demo.svg demo
